@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.js"></script>
+    <script>
+        // включаем режим тестирования в стиле BDD
+        mocha.setup('bdd');
+    </script>
+    <!-- добавим chai -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
+    <script>
+        // chai предоставляет большое количество функций. Объявим assert глобально
+        let assert = chai.assert;
+    </script>
+</head>
+<body>
+    <script>
+        // Функция сериализации массива чисел в строку
+        function serialize(arr) {
+            return arr.join(',');
+        };
+        
+        // Функция десериализации строки в массив чисел
+        function deserialize(str) {
+            return str.split(',').map(Number);
+        };
+
+        // Функция для расчета коэффициента сжатия
+        function compressionRatio(arr, serialized) {
+            const originalSize = arr.length * 4; // Предполагаем, что каждое число занимает 4 байта
+            const compressedSize = serialized.length;
+            return originalSize / compressedSize;
+        };
+    </script>
+    
+    <!-- скрипт со спецификацией (describe, it...) -->
+    <script src="test.js"></script>
+
+    <!-- элемент с id="mocha" будет содержать результаты тестов -->
+    <div id="mocha"></div>
+    
+    <!-- запускаем тесты! -->
+    <script>
+        mocha.run();
+    </script>
+</body>
+</html>
